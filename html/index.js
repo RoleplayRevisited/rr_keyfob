@@ -34,7 +34,7 @@ $(function() {
     if (event.data.type == "enableKeyFob") {
      $("#fob").show();
     } else if (event.data.type == "playSound") {
-      let audioPlayer = new Audio('./sounds/' + event.data.file + ".ogg");
+      let audioPlayer = new Audio(`./sounds/${event.data.file}.ogg`);
       audioPlayer.volume = event.data.volume; 
       audioPlayer.play();
     }
