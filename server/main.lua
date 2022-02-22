@@ -4,7 +4,7 @@ if Config.useKeySystem then
   local Keys = {}
 
   if Config.useFramework == "esx" then 
-    TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+    ESX = exports["es_extended"]:getSharedObject()
 
     ESX.RegisterServerCallback("rr_keyfob:hasKey", function(src, cb, vehicle)
       local stringVeh = tostring(vehicle)
