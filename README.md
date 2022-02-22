@@ -1,3 +1,5 @@
+<div align='center'><h3><a href="https://discord.gg/RsWzxwtAY3">Discord</a></h3></div>
+
 # rr_keyfob
 A simple keyfob script to control your car
 You can open your trunk/frunk, lock/unlock your car, start/stop your car, trigger your alarm and control your windows.
