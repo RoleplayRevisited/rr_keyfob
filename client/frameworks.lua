@@ -8,5 +8,5 @@ if Config.useFramework == "esx" then
 end 
 
 if Config.useFramework == "qbcore" then 
-  QBCore = exports.qb-core:GetCoreObject()
+  QBCore = exports['qb-core']:GetCoreObject()
 end 

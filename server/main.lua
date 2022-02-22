@@ -25,7 +25,7 @@ if Config.useKeySystem then
   end 
 
   if Config.useFramework == "qbcore" then 
-    QBCore = exports.qb-core:GetCoreObject()
+    QBCore = exports['qb-core']:GetCoreObject()
 
     QBCore.Functions.CreateCallback("rr_keyfob:hasKey", function(src, cb, vehicle)
       local stringVeh = tostring(vehicle)
