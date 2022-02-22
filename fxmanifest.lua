@@ -3,13 +3,20 @@ game 'gta5'
 
 name 'rr_keyfob'
 description 'Simple Keyfob to control your car'
-version '1.0'
+version '1.1'
 url 'https://github.com/RoleplayRevisited/rr_keyfob'
 author 'RoleplayRevisted - Kevintjuhz'
 
 client_scripts {
   'config.lua',
-  'client.lua'
+  'client/esx.lua',
+  'client/main.lua',
+  'client/messages.lua',
+}
+
+server_scripts {
+  'config.lua',
+  'server/main.lua'
 }
 
 ui_page 'html/index.html' 

@@ -84,11 +84,11 @@ RegisterNUICallback('alarm', function(data, cb)
 end)
 
 RegisterNUICallback('unlock', function(data, cb)
-  toggleLockState("unlock")
+  checkLock("unlock")
 end)
 
 RegisterNUICallback('lock', function(data, cb)
-  toggleLockState("lock")
+  checkLock("lock")
 end)
 
 RegisterNUICallback('startstop', function(data, cb)
@@ -102,7 +102,31 @@ RegisterNUICallback('startstop', function(data, cb)
   end 
 end)
 
-function toggleLockState(lock)
+function checkLock(lock)
+  local vehicle = GetLastDrivenVehicle()
+
+  if Config.useKeySystem and Config.useEsx then 
+    local hasKey = false
+
+    -- TriggerServerEvent("rr_keyfob:giveKey", vehicle)
+    ESX.TriggerServerCallback("rr_keyfob:hasKey", function(value)
+      hasKey = value
+
+      if not hasKey then
+        createNotification(Config.Locales["no_key"], "error")
+        return
+      end 
+
+      toggleLockVehicle(lock)
+    end, vehicle)
+  else 
+    toggleLockVehicle(lock)
+  end 
+
+  
+end 
+
+function toggleLockVehicle(lock)
   local vehicle = GetLastDrivenVehicle()
 
   if (lock == "lock") then 
@@ -124,8 +148,8 @@ function toggleLockState(lock)
 	SetVehicleLights(vehicle, 2)
 	Wait (400)
 	SetVehicleLights(vehicle, 0)
-end 
 
+end
 
 -- Handle GUI stuff
 
