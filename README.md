@@ -34,6 +34,8 @@ And I will also add multiple pages to the screen. The pages I was thinking of cr
 The icons used:
 [Car window icons created by LAFS - Flaticon](https://www.flaticon.com/free-icons/car-window)
 
+If you have any further questions please join my <a href="https://discord.gg/RsWzxwtAY3">Discord</a>. So that I can help you
+
 ## Legal
 
 # License
