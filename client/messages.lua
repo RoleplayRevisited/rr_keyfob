@@ -26,6 +26,14 @@ function createNotification(msg, style)
     DrawNotification(0,1)
     return
   end
+
+  if Config.messageService == "qbcore" then 
+    local newStyle = style
+    if style == "info" then 
+      newStyle = "primary"
+    end 
+    QBCore.Functions.Notify(msg, newStyle)
+  end 
 end 
 
 function getMessageStyle(style)
