@@ -98,7 +98,7 @@ RegisterNUICallback('startstop', function(data, cb)
   if engineRunning then 
     SetVehicleEngineOn(vehicle, false, false, true)
   else 
-    SetVehicleEngineOn(vehicle, true, false, true)
+    SetVehicleEngineOn(vehicle, true, true, true)
   end 
 end)
 
