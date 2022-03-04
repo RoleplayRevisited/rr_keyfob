@@ -1,15 +1,21 @@
 <div align='center'><h3><a href="https://discord.gg/RsWzxwtAY3">Discord</a></h3></div>
 
 # rr_keyfob
+
 A simple keyfob script to control your car
 You can open your trunk/frunk, lock/unlock your car, start/stop your car, trigger your alarm and control your windows.
 Also have a look at the config, there are a few things you can toggle.
 
 I hope you will enjoy this simple resource ;)
 
+## Warning
+
+When installing the resource make sure you rename it to `rr_keyfob`
+
 ## Usage
+
 To open the keyfob press `I` this can be changed by the user in their keybindings
-When the button is pressed the keyfob will appear and nui focus will be on. 
+When the button is pressed the keyfob will appear and nui focus will be on.
 There are a few buttons the player can click (see image below)
 
 ![all the buttons](keyfob-showcase.png)
@@ -24,12 +30,13 @@ For now you have the following buttons:
 - Screen -> Each window button opens a specific window (top left opens fron left window, etc etc)
 
 ## Roadmap
-If there is interest in this resource I will probably rewrite a bit of the code to make it cleaner. 
+
+If there is interest in this resource I will probably rewrite a bit of the code to make it cleaner.
 And I will also add multiple pages to the screen. The pages I was thinking of creating
+
 - Fuel page (See amount of fuel left)
 - Door Control page (Control the vehicle doors)
 - More to come....
-
 
 The icons used:
 [Car window icons created by LAFS - Flaticon](https://www.flaticon.com/free-icons/car-window)
@@ -39,7 +46,8 @@ If you have any further questions please join my <a href="https://discord.gg/RsW
 ## Legal
 
 # License
-rr_keyfob 
+
+rr_keyfob
 Copyright (c) 2022 RoleplayRevisited
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
