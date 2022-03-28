@@ -47,7 +47,7 @@ RegisterNUICallback("toggleWindow", function(data, cb)
   if IsVehicleWindowIntact(vehicle, id) then 
     RollDownWindow(vehicle, id)
   else 
-    print("here")
+    --print("here")
     RollUpWindow(vehicle, id)
   end 
 end)
@@ -110,8 +110,8 @@ function checkLock(lock)
     return
   end
   lastVeh = vehicle
-  local plate = GetVehicleNumberPlateText(vehicle)
   local hasKey = false
+  local plate = GetVehicleNumberPlateText(vehicle)
 
   if Config.useKeySystem and Config.useFramework == "esx" then 
 
@@ -124,7 +124,7 @@ function checkLock(lock)
       end 
 
       toggleLockVehicle(lock)
-    end, plate)
+    end, vehicle, plate)
   elseif Config.useKeySystem and Config.useFramework == "qbcore" then
     QBCore.Functions.TriggerCallback("rr_keyfob:isOwner", function(value)
       hasKey = value
@@ -135,7 +135,7 @@ function checkLock(lock)
       end 
 
       toggleLockVehicle(lock)
-    end, plate)
+    end, vehicle, plate)
   else 
     toggleLockVehicle(lock)
   end 
