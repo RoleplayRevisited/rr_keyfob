@@ -29,6 +29,27 @@ For now you have the following buttons:
 - Circle -> Lock the car
 - Screen -> Each window button opens a specific window (top left opens fron left window, etc etc)
 
+## Key System
+
+To make use of the build-in key system you need to set `useKeySystem = true` in the config.
+
+How this system works is that it checks if the license plate matches the database table.
+In the case of esx it checks `owned_vehicles` and in the case of qbcore it checks `player_vehicles`
+
+If you have an additional need to give keys to players for vehicles they don't own personally (For example for any jobs or emergency services where you want to give people the ability to lock those vehicles aswell.) You need to do some manual work. In the resource that spawns a vehicle where you want to give a player the key for you can trigger this event.
+
+From the client:
+
+```lua
+TriggerServerEvent("rr_keyfob:giveKey", vehicle) -- vehicle is the Vehicle entity
+```
+
+From the server:
+
+```lua
+TriggerEvent("rr_keyfob:giveKey", vehicle, source) -- vehicle is the Vehicle entity & source the client source
+```
+
 ## Roadmap
 
 If there is interest in this resource I will probably rewrite a bit of the code to make it cleaner.
@@ -38,10 +59,14 @@ And I will also add multiple pages to the screen. The pages I was thinking of cr
 - Door Control page (Control the vehicle doors)
 - More to come....
 
+If you have any further questions please join my <a href="https://discord.gg/RsWzxwtAY3">Discord</a>. So that I can help you
+
+## Credits
+
+[Troughy](https://github.com/Troughy) Added vehicle owned check in db
+
 The icons used:
 [Car window icons created by LAFS - Flaticon](https://www.flaticon.com/free-icons/car-window)
-
-If you have any further questions please join my <a href="https://discord.gg/RsWzxwtAY3">Discord</a>. So that I can help you
 
 ## Legal
 
