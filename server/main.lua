@@ -1,54 +1,38 @@
 if Config.useKeySystem then 
   local ESX = nil 
-  local QBCore = nil 
+  local QBCore = nil
   local Keys = {}
 
   if Config.useFramework == "esx" then 
     ESX = exports["es_extended"]:getSharedObject()
 
-    ESX.RegisterServerCallback("rr_keyfob:hasKey", function(src, cb, vehicle)
-      local stringVeh = tostring(vehicle)
-      if not Keys[src] then 
-        cb(false)
-        return
-      end 
-
-      if not Keys[src][stringVeh] then 
-        cb(false)
-        return
-      end 
-
-      print(Keys[src][stringVeh])
-
-      cb(Keys[src][stringVeh])
+    ESX.RegisterServerCallback("rr_keyfob:isOwner", function(src, cb, veh, plate)
+      if (Keys[src] and Keys[src][tostring(veh)]) then cb(Keys[src][tostring(veh)]) return end
+      exports['mysql-async']:mysql_fetch_all("SELECT `owner` FROM `owned_vehicles` WHERE plate = @plate", {
+        ['@plate'] = plate
+      }, function(result) 
+        cb(result and result[1] and result[1]["owner"] and ESX.GetPlayerFromId(src).getIdentifier() == result[1]["owner"])    
+      end)
     end)
   end 
 
   if Config.useFramework == "qbcore" then 
     QBCore = exports['qb-core']:GetCoreObject()
 
-    QBCore.Functions.CreateCallback("rr_keyfob:hasKey", function(src, cb, vehicle)
-      local stringVeh = tostring(vehicle)
-      if not Keys[src] then 
-        cb(false)
-        return
-      end 
-
-      if not Keys[src][stringVeh] then 
-        cb(false)
-        return
-      end 
-
-      print(Keys[src][stringVeh])
-
-      cb(Keys[src][stringVeh])
+    QBCore.Functions.CreateCallback("rr_keyfob:isOwner", function(src, cb, veh, plate)
+      if (Keys[src] and Keys[src][tostring(veh)]) then cb(Keys[src][tostring(veh)]) return end
+      exports['mysql-async']:mysql_fetch_all("SELECT `license` FROM `player_vehicles` WHERE plate = @plate", {
+        ['@plate'] = plate
+      }, function(result) 
+        cb(result and result[1] and result[1]["license"] and QBCore.Functions.GetIdentifier(src, "license") == result[1]["license"])    
+      end)
     end)
-  end 
+  end
 
   RegisterNetEvent("rr_keyfob:giveKey")
   AddEventHandler("rr_keyfob:giveKey", function(vehicle, src)
     local stringVeh = tostring(vehicle)
-    print("here")
+    --print("here "..source)
     local playerSrc = nil 
 
     if source then 

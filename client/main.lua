@@ -1,4 +1,5 @@
 local lastVeh = nil
+local isVehOwned = nil
 
 -- Prevent the starting of the engine if you get into the car
 Citizen.CreateThread(function()
@@ -46,7 +47,7 @@ RegisterNUICallback("toggleWindow", function(data, cb)
   if IsVehicleWindowIntact(vehicle, id) then 
     RollDownWindow(vehicle, id)
   else 
-    print("here")
+    --print("here")
     RollUpWindow(vehicle, id)
   end 
 end)
@@ -104,12 +105,17 @@ end)
 
 function checkLock(lock)
   local vehicle = GetLastDrivenVehicle()
+  if vehicle == lastVeh and isVehOwned then
+    toggleLockVehicle(lock)
+    return
+  end
+  lastVeh = vehicle
   local hasKey = false
+  local plate = GetVehicleNumberPlateText(vehicle)
 
   if Config.useKeySystem and Config.useFramework == "esx" then 
 
-    -- TriggerServerEvent("rr_keyfob:giveKey", vehicle)
-    ESX.TriggerServerCallback("rr_keyfob:hasKey", function(value)
+    ESX.TriggerServerCallback("rr_keyfob:isOwner", function(value)
       hasKey = value
 
       if not hasKey then
@@ -118,9 +124,9 @@ function checkLock(lock)
       end 
 
       toggleLockVehicle(lock)
-    end, vehicle)
+    end, vehicle, plate)
   elseif Config.useKeySystem and Config.useFramework == "qbcore" then
-    QBCore.Functions.TriggerCallback("rr_keyfob:hasKey", function(value)
+    QBCore.Functions.TriggerCallback("rr_keyfob:isOwner", function(value)
       hasKey = value
 
       if not hasKey then
@@ -129,10 +135,11 @@ function checkLock(lock)
       end 
 
       toggleLockVehicle(lock)
-    end, vehicle)
+    end, vehicle, plate)
   else 
     toggleLockVehicle(lock)
-  end   
+  end 
+  isVehOwned = hasKey
 end 
 
 function toggleLockVehicle(lock)
