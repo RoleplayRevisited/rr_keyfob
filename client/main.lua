@@ -39,13 +39,6 @@ Citizen.CreateThread(function()
   end 
 end)
 
-function ownershipCheck()
-  local vehicle = GetLastDrivenVehicle()
-  local plate = GetVehicleNumberPlateText(vehicle)
-  
-
-end
-
 RegisterNUICallback("toggleWindow", function(data, cb)
   local vehicle = GetLastDrivenVehicle()
   local id = data.window
