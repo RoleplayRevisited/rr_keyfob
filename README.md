@@ -1,6 +1,3 @@
-<div align='center'><h1><b>This fork adds the ability to lock/unlock doors of vehicles you own. It requires mysql-async or oxmysql to be installed, therefore it uses SQL to check ownership of vehicles.</b></h1></div>
-
-
 <div align='center'><h3><a href="https://discord.gg/RsWzxwtAY3">Discord</a></h3></div>
 
 # rr_keyfob
