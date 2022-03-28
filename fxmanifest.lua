@@ -7,6 +7,8 @@ version '1.2'
 url 'https://github.com/RoleplayRevisited/rr_keyfob'
 author 'RoleplayRevisted - Kevintjuhz'
 
+dependency 'mysql-async'
+
 client_scripts {
   'config.lua',
   'client/frameworks.lua',
@@ -15,6 +17,7 @@ client_scripts {
 }
 
 server_scripts {
+  '@mysql-async/lib/MySQL.lua',
   'config.lua',
   'server/main.lua'
 }
