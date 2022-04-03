@@ -110,40 +110,42 @@ function checkLock(lock)
     return
   end
   lastVeh = vehicle
-  local hasKey = false
   local plate = GetVehicleNumberPlateText(vehicle)
 
   if Config.useKeySystem and Config.useFramework == "esx" then 
 
     ESX.TriggerServerCallback("rr_keyfob:isOwner", function(value)
-      hasKey = value
-
-      if not hasKey then
-        createNotification(Config.Locales["no_key"], "error")
+      isVehOwned = value
+      if not value then
+        local closest = ESX.Game.GetClosestVehicle()
+        if closest == lastVeh and closest~=-1 then createNotification(Config.Locales["no_key"], "error") return end
+        ESX.TriggerServerCallback("rr_keyfob:isOwner", function(bool)
+          if bool then toggleLockVehicle(lock, closest) isVehOwned = true else createNotification(Config.Locales["no_key"], "error") end
+        end, closest, GetVehicleNumberPlateText(closest))
         return
       end 
-
       toggleLockVehicle(lock)
     end, vehicle, plate)
   elseif Config.useKeySystem and Config.useFramework == "qbcore" then
     QBCore.Functions.TriggerCallback("rr_keyfob:isOwner", function(value)
-      hasKey = value
-
-      if not hasKey then
-        createNotification(Config.Locales["no_key"], "error")
+      isVehOwned = value
+      if not value then
+        local closest = QBCore.Functions.GetClosestVehicle()
+        if closest == lastVeh and closest~=-1 then createNotification(Config.Locales["no_key"], "error") return end
+        QBCore.Functions.TriggerCallback("rr_keyfob:isOwner", function(bool)
+          if bool then toggleLockVehicle(lock, closest) isVehOwned = true else createNotification(Config.Locales["no_key"], "error") end
+        end, closest, GetVehicleNumberPlateText(closest))
         return
       end 
-
       toggleLockVehicle(lock)
     end, vehicle, plate)
   else 
     toggleLockVehicle(lock)
   end 
-  isVehOwned = hasKey
 end 
 
-function toggleLockVehicle(lock)
-  local vehicle = GetLastDrivenVehicle()
+function toggleLockVehicle(lock, veh)
+  local vehicle = veh or GetLastDrivenVehicle()
 
   if (lock == "lock") then 
     SetVehicleDoorsLocked(vehicle, 2)
