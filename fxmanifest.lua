@@ -7,15 +7,18 @@ version '1.2.1'
 url 'https://github.com/RoleplayRevisited/rr_keyfob'
 author 'RoleplayRevisted - Kevintjuhz'
 
+lua54 'yes'
+use_fxv2_oal 'yes'
+
+shared_script 'config.lua'
+
 client_scripts {
-  'config.lua',
   'client/frameworks.lua',
   'client/main.lua',
   'client/messages.lua',
 }
 
 server_scripts {
-  'config.lua',
   'server/main.lua'
 }
 
