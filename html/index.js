@@ -1,49 +1,47 @@
-$("#fob").hide();
-
-$(function() {
+$(() => {
   // On trunk click
   $(".btn-left").click(function() {
-    $.post('https://rr_keyfob/trunk', JSON.stringify({}));
+    $.post('https://rr_keyfob/trunk');
   });
 
   $(".btn-right").click(function() {
-    $.post('https://rr_keyfob/startstop', JSON.stringify({}));
+    $.post('https://rr_keyfob/startstop');
   });
 
   $(".btn-top").click(function() {
-    $.post('https://rr_keyfob/unlock', JSON.stringify({}));
+    $.post('https://rr_keyfob/unlock');
   });
 
   $(".btn-top").dblclick(function() {
-    $.post('https://rr_keyfob/alarm', JSON.stringify({}));
+    $.post('https://rr_keyfob/alarm');
   });
 
   $(".btn-circle").click(function() {
-    $.post('https://rr_keyfob/lock', JSON.stringify({}));
+    $.post('https://rr_keyfob/lock');
   });
 
-  $('.window').each(function() {
-    let $this = $(this);
-    $this.on("click", function() {
+  $('.window').each(() => {
+    const $this = $(this);
+    $this.on("click", () => {
       const id = $(this).data("window-id")
       $.post('https://rr_keyfob/toggleWindow', JSON.stringify({window: id}))
     });
   });
 
-  window.addEventListener('message', function(event) {
+  window.addEventListener('message', (event) => {
     if (event.data.type == "enableKeyFob") {
      $("#fob").show();
     } else if (event.data.type == "playSound") {
-      let audioPlayer = new Audio(`./sounds/${event.data.file}.ogg`);
-      audioPlayer.volume = event.data.volume; 
+      const audioPlayer = new Audio(`./sounds/${event.data.file}.ogg`);
+      audioPlayer.volume = event.data.volume;
       audioPlayer.play();
     }
   });
 
-  document.onkeyup = function (data) {
-    if (data.which == 27) { // Escape key
-        $.post('https://rr_keyfob/escape', JSON.stringify({}));
-        $("#fob").hide();
+  document.onkeyup = (data) => {
+    if (data.key == 'Escape') {
+      $.post('https://rr_keyfob/escape');
+      $("#fob").hide();
     }
-};
+  };
 });
