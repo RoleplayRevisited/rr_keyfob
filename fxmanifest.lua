@@ -11,13 +11,7 @@ lua54 'yes'
 use_fxv2_oal 'yes'
 
 shared_script 'config.lua'
-
-client_scripts {
-	'client/frameworks.lua',
-	'client/main.lua',
-	'client/messages.lua'
-}
-
+client_script 'client/main.lua'
 server_script 'server/main.lua'
 
 ui_page 'html/index.html'
