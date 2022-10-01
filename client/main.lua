@@ -144,11 +144,9 @@ CreateThread(function()
 					TaskLeaveVehicle(ped, vehicle, 256)
 				end
 				engineOn = GetIsVehicleEngineRunning(vehicle)
-				sleep = 100
 			end
 			if IsControlJustReleased(2, 75)  then
 				SetVehicleEngineOn(vehicle, engineOn, true, true)
-				sleep = 100
 			end
 		end
 		Wait(sleep)
