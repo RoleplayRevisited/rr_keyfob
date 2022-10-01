@@ -1,5 +1,4 @@
 #fob {
-  /* display: none; */
   position: absolute;
   bottom: 50px;
   right: 10rem;
@@ -56,8 +55,6 @@
 .screen-page {
   z-index: 10;
   margin: 0 auto;
-  /* margin-top: 15px; */
-  /* background-color: blue; */
   max-width: 110px;
   max-height: 175px;
   width: 110px;
@@ -65,7 +62,6 @@
   display: flex;
   flex-wrap: wrap;
   position: absolute;
-  /* padding:5px; */
   box-sizing: border-box;
   justify-content: center;
   align-items: center;
@@ -76,10 +72,8 @@
 
 .window {
   z-index: 5;
-  /* background-color: beige; */
   color: white;
   padding: 7px;
-  /* margin: 5px; */
 }
 
 .window-image {
