@@ -8,7 +8,7 @@ url 'https://github.com/RoleplayRevisited/rr_keyfob'
 author 'RoleplayRevisted - Kevintjuhz'
 
 lua54 'yes'
-use_fxv2_oal 'yes'
+use_experimental_fxv2_oal 'yes'
 
 shared_script 'config.lua'
 client_script 'client/main.lua'
